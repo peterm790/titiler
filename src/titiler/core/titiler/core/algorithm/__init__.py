@@ -9,9 +9,13 @@ from fastapi import HTTPException, Query
 from pydantic import ValidationError
 from typing_extensions import Annotated
 
-from titiler.core.algorithm.base import AlgorithmMetadata  # noqa
-from titiler.core.algorithm.base import BaseAlgorithm
+from titiler.core.algorithm.base import (  # noqa
+    AlgorithmMetadata,
+    AlgorithmtList,
+    BaseAlgorithm,
+)
 from titiler.core.algorithm.dem import Contours, HillShade, Slope, TerrainRGB, Terrarium
+from titiler.core.algorithm.image import ToBitonal, ToGrayScale
 from titiler.core.algorithm.index import NormalizedIndex
 from titiler.core.algorithm.math import _Max, _Mean, _Median, _Min, _Std, _Sum, _Var
 from titiler.core.algorithm.ops import CastToInt, Ceil, Floor
@@ -33,6 +37,8 @@ default_algorithms: Dict[str, Type[BaseAlgorithm]] = {
     "std": _Std,
     "var": _Var,
     "sum": _Sum,
+    "grayscale": ToGrayScale,
+    "bitonal": ToBitonal,
 }
 
 

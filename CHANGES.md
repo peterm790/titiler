@@ -2,6 +2,33 @@
 
 ## Unreleased
 
+* add `grayscale` and `bitonal` algorithms
+
+## 0.24.0 (2025-09-23)
+
+### Misc
+
+* add attribution in `/tilejson.json` response. Controled with `TITILER_DEFAULT_ATTRIBUTION` environment variable.
+* enable `jinja2.autoescape` for HTML/XML templates (ref: https://jinja.palletsprojects.com/en/stable/api/#autoescaping)
+* remove python 3.9 support
+
+### titiler.extension 
+
+* update rio-stac requirement
+
+### titiler.application
+
+* add `description` in `ApiSettings`
+
+### titiler.core
+
+* delete `titiler.core.templating` submodule **breaking change**
+* move `create_html_response` function to `titiler.core.utils` submodule
+* move all HTML templates in `titiler/core/templates` directory  **breaking change**
+* add HTML responses for tilesets, tilematrixsets, algorithms and colormaps endpoints
+* rename response model `ColorMapsList` -> `ColorMapList` and change it's attibutes to `colormaps` **breaking change**
+* add `templates` in the `BaseFactory` class definition
+
 ## 0.23.1 (2025-08-27)
 
 ### titiler.core

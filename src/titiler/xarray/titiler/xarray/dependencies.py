@@ -49,6 +49,13 @@ class XarrayDsParams(DefaultDependency):
         ),
     ] = None
 
+    isel: Annotated[
+        Optional[List[SelDimStr]],
+        Query(
+            description="Xarray integer-based indexing using dimension names `{dimension}={index}`.",
+        ),
+    ] = None
+
     method: Annotated[
         Optional[Literal["nearest", "pad", "ffill", "backfill", "bfill"]],
         Query(
@@ -82,6 +89,13 @@ class CompatXarrayParams(XarrayIOParams):
         Optional[List[SelDimStr]],
         Query(
             description="Xarray Indexing using dimension names `{dimension}={value}`.",
+        ),
+    ] = None
+
+    isel: Annotated[
+        Optional[List[SelDimStr]],
+        Query(
+            description="Xarray integer-based indexing using dimension names `{dimension}={index}`.",
         ),
     ] = None
 

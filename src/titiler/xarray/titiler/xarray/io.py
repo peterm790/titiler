@@ -135,6 +135,7 @@ def get_variable(
     ds: xarray.Dataset,
     variable: str,
     sel: Optional[List[str]] = None,
+    isel: Optional[List[str]] = None,
     method: Optional[Literal["nearest", "pad", "ffill", "backfill", "bfill"]] = None,
 ) -> xarray.DataArray:
     """Get Xarray variable as DataArray.
@@ -142,7 +143,8 @@ def get_variable(
     Args:
         ds (xarray.Dataset): Xarray Dataset.
         variable (str): Variable to extract from the Dataset.
-        sel (list of str, optional): List of Xarray Indexes.
+        sel (list of str, optional): List of Xarray Indexes using label-based selection.
+        isel (list of str, optional): List of Xarray Indexes using integer-based selection.
         method (str): Xarray indexing method.
 
     Returns:
@@ -168,6 +170,24 @@ def get_variable(
 
         sel_idx = {k: v[0] if len(v) < 2 else v for k, v in _idx.items()}
         da = da.sel(sel_idx, method=method)
+
+    if isel:
+        _idx: Dict[str, List] = {}
+        for s in isel:
+            val: Union[int, slice]
+            dim, val = s.split("=")
+
+            # cast string to integer for integer-based selection
+            if isinstance(val, str):
+                val = int(val)
+
+            if dim in _idx:
+                _idx[dim].append(val)
+            else:
+                _idx[dim] = [val]
+
+        isel_idx = {k: v[0] if len(v) < 2 else v for k, v in _idx.items()}
+        da = da.isel(isel_idx)
 
     da = _arrange_dims(da)
 
@@ -202,6 +222,7 @@ class Reader(XarrayReader):
 
     # xarray.DataArray options
     sel: Optional[List[str]] = attr.ib(default=None)
+    isel: Optional[List[str]] = attr.ib(default=None)
     method: Optional[Literal["nearest", "pad", "ffill", "backfill", "bfill"]] = attr.ib(
         default=None
     )
@@ -225,6 +246,7 @@ class Reader(XarrayReader):
             self.ds,
             self.variable,
             sel=self.sel,
+            isel=self.isel,
             method=self.method,
         )
         super().__attrs_post_init__()

@@ -494,6 +494,16 @@ class ImageRenderingParams(RenderingParams):
         ),
     ] = None
 
+    npy_uint8: Annotated[
+        Optional[bool],
+        Query(
+            description=(
+                "When format=npy, cast data bands to uint8. If source dtype is not uint8, "
+                "you must also provide rescale to map input ranges to [0,255]."
+            )
+        ),
+    ] = None
+
 
 @dataclass
 class StatisticsParams(DefaultDependency):

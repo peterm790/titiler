@@ -24,7 +24,6 @@ from starlette.routing import Route, request_response
 from starlette.templating import Jinja2Templates, _TemplateResponse
 
 from titiler.core.resources.enums import ImageType, MediaType
-from fastapi import HTTPException
 
 
 def rescale_array(
@@ -64,7 +63,6 @@ def render_image(  # noqa: C901
     add_mask: bool = True,
     rescale: Optional[Sequence[IntervalTuple]] = None,
     color_formula: Optional[str] = None,
-    npy_uint8: Optional[bool] = None,
     **kwargs: Any,
 ) -> Tuple[bytes, str]:
     """convert image data to file.
@@ -108,18 +106,6 @@ def render_image(  # noqa: C901
             stacklevel=1,
         )
         data = rescale_array(data, mask, in_range=datatype_range)
-
-    # If requested, enforce uint8 for NPY outputs
-    if output_format == ImageType.npy and npy_uint8:
-        if data.dtype != numpy.uint8 and not rescale:
-            raise HTTPException(
-                status_code=400,
-                detail=(
-                    "npy_uint8=true requires rescale when source dtype is not uint8. "
-                    "Provide rescale per band to map to [0,255]."
-                ),
-            )
-        data = data.astype("uint8")
 
     creation_options = {**kwargs, **output_format.profile}
     if output_format == ImageType.tif:

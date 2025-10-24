@@ -189,6 +189,12 @@ def get_variable(
         isel_idx = {k: v[0] if len(v) < 2 else v for k, v in _idx.items()}
         da = da.isel(isel_idx)
 
+    # Ensure deterministic ascending order for all non-spatial dimensions
+    for _dim in [d for d in da.dims if d not in ("x", "y")]:
+        if _dim not in da.coords:
+            raise ValueError(f"Cannot sort by {_dim}: missing coordinate.")
+        da = da.sortby(da[_dim])
+
     da = _arrange_dims(da)
 
     # Make sure we have a valid CRS

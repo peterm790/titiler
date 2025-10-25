@@ -186,16 +186,24 @@ def get_variable(
             else:
                 _idx[dim] = [val]
 
+        # Ensure indices are in ascending order per dimension
+        for _dim, _values in list(_idx.items()):
+            print('_dim', _dim)
+            print('_values', _values)
+            if isinstance(_values, list) and len(_values) > 1:
+                try:
+                    _idx[_dim] = sorted(_values)
+                    print('sorted _idx', _idx)
+                    print('sorted _values', sorted(_values))
+                except Exception:
+                    # If values are not sortable (shouldn't happen for ints), leave as-is
+                    print('error', Exception)
+                    pass
+
         isel_idx = {k: v[0] if len(v) < 2 else v for k, v in _idx.items()}
         da = da.isel(isel_idx)
 
     da = _arrange_dims(da)
-
-    # Ensure deterministic ascending order for all non-spatial dimensions
-    for _dim in [d for d in da.dims if d not in ("x", "y")]:
-        if _dim not in da.coords:
-            raise ValueError(f"Cannot sort by {_dim}: missing coordinate.")
-        da = da.sortby(da[_dim])
 
     # Make sure we have a valid CRS
     crs = da.rio.crs or "epsg:4326"

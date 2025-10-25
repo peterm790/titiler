@@ -1,5 +1,5 @@
 [project]
-name = "ptitiler"
+name = "titiler"
 description = "A modern dynamic tile server built on top of FastAPI and Rasterio/GDAL."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,11 +30,11 @@ classifiers = [
 ]
 version="0.24.0"
 dependencies = [
-    "ptitiler.core==0.24.0",
-    "ptitiler.xarray==0.24.0",
-    "ptitiler.extensions==0.24.0",
-    "ptitiler.mosaic==0.24.0",
-    "ptitiler.application==0.24.0",
+    "titiler.core==0.24.0",
+    "titiler.xarray==0.24.0",
+    "titiler.extensions==0.24.0",
+    "titiler.mosaic==0.24.0",
+    "titiler.application==0.24.0",
 ]
 
 [project.urls]
@@ -169,32 +169,32 @@ replace = 'version="{new_version}"'
 # core
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'ptitiler.core=={current_version}'
-replace = 'ptitiler.core=={new_version}'
+search = 'titiler.core=={current_version}'
+replace = 'titiler.core=={new_version}'
 
 # xarray
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'ptitiler.xarray=={current_version}'
-replace = 'ptitiler.xarray=={new_version}'
+search = 'titiler.xarray=={current_version}'
+replace = 'titiler.xarray=={new_version}'
 
 # extensions
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'ptitiler.extensions=={current_version}'
-replace = 'ptitiler.extensions=={new_version}'
+search = 'titiler.extensions=={current_version}'
+replace = 'titiler.extensions=={new_version}'
 
 # mosaic
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'ptitiler.mosaic=={current_version}'
-replace = 'ptitiler.mosaic=={new_version}'
+search = 'titiler.mosaic=={current_version}'
+replace = 'titiler.mosaic=={new_version}'
 
 # application
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'ptitiler.application=={current_version}'
-replace = 'ptitiler.application=={new_version}'
+search = 'titiler.application=={current_version}'
+replace = 'titiler.application=={new_version}'
 
 ###############################################################################
 # Update sub modules version
@@ -233,48 +233,48 @@ replace = '__version__ = "{new_version}"'
 # titiler.xarray
 [[tool.bumpversion.files]]
 filename = "src/titiler/xarray/pyproject.toml"
-search = 'ptitiler.core=={current_version}'
-replace = 'ptitiler.core=={new_version}'
+search = 'titiler.core=={current_version}'
+replace = 'titiler.core=={new_version}'
 
 # titiler.extensions
 [[tool.bumpversion.files]]
 filename = "src/titiler/extensions/pyproject.toml"
-search = 'ptitiler.core=={current_version}'
-replace = 'ptitiler.core=={new_version}'
+search = 'titiler.core=={current_version}'
+replace = 'titiler.core=={new_version}'
 
 # titiler.mosaic
 [[tool.bumpversion.files]]
 filename = "src/titiler/mosaic/pyproject.toml"
-search = 'ptitiler.core=={current_version}'
-replace = 'ptitiler.core=={new_version}'
+search = 'titiler.core=={current_version}'
+replace = 'titiler.core=={new_version}'
 
 # titiler.application
 [[tool.bumpversion.files]]
 filename = "src/titiler/application/pyproject.toml"
-search = 'ptitiler.core[telemetry]=={current_version}'
-replace = 'ptitiler.core[telemetry]=={new_version}'
+search = 'titiler.core[telemetry]=={current_version}'
+replace = 'titiler.core[telemetry]=={new_version}'
 
 [[tool.bumpversion.files]]
 filename = "src/titiler/application/pyproject.toml"
-search = 'ptitiler.extensions[cogeo,stac]=={current_version}'
-replace = 'ptitiler.extensions[cogeo,stac]=={new_version}'
+search = 'titiler.extensions[cogeo,stac]=={current_version}'
+replace = 'titiler.extensions[cogeo,stac]=={new_version}'
 
 [[tool.bumpversion.files]]
 filename = "src/titiler/application/pyproject.toml"
-search = 'ptitiler.mosaic=={current_version}'
-replace = 'ptitiler.mosaic=={new_version}'
+search = 'titiler.mosaic=={current_version}'
+replace = 'titiler.mosaic=={new_version}'
 
 ###############################################################################
 # Others
 [[tool.bumpversion.files]]
 filename = "deployment/aws/lambda/Dockerfile"
-search = 'ptitiler.application=={current_version}'
-replace = 'ptitiler.application=={new_version}'
+search = 'titiler.application=={current_version}'
+replace = 'titiler.application=={new_version}'
 
 [[tool.bumpversion.files]]
 filename = "deployment/aws/lambda/Dockerfile.xarray"
-search = 'ptitiler.xarray=={current_version}'
-replace = 'ptitiler.xarray=={new_version}'
+search = 'titiler.xarray=={current_version}'
+replace = 'titiler.xarray=={new_version}'
 
 [[tool.bumpversion.files]]
 filename = "deployment/k8s/charts/Chart.yaml"

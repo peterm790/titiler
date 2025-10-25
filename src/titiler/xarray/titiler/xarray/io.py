@@ -200,7 +200,7 @@ def get_variable(
                     print('error', Exception)
                     pass
 
-        isel_idx = {k: v[0] if len(v) == 1 else v for k, v in _idx.items()}
+        isel_idx = {k: v[0] if len(v) < 2 else v for k, v in _idx.items()}
         da = da.isel(isel_idx)
 
     da = _arrange_dims(da)

@@ -1,5 +1,5 @@
 [project]
-name = "ptitiler-extensions"
+name = "titiler-extensions"
 description = "Extensions for TiTiler Factories."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,7 +30,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-    "ptitiler.core==0.24.0"
+    "titiler.core==0.24.0"
 ]
 
 [project.optional-dependencies]
